@@ -23,18 +23,18 @@ const config = {
   width: 1920,
   height: 1080,
   physics: {
-    default: 'arcade',
+    default: "arcade",
     arcade: {
-      debug: true
-    }
+      debug: true,
+    },
   },
   // set background color
   backgroundColor: 0xffffff,
   scale: {
     mode: Phaser.Scale.FIT,
     // we place it in middle of the page.
-    autoCenter: Phaser.Scale.CENTER_BOTH
-  }
+    autoCenter: Phaser.Scale.CENTER_BOTH,
+  },
 }
 
 const game = new Phaser.Game(config)
@@ -42,10 +42,10 @@ const game = new Phaser.Game(config)
 
 // load scenes
 // NOTE: remember any "key" is global and CAN NOT be reused!
-game.scene.add("splashScene",splashScene)
+game.scene.add("splashScene", splashScene)
 game.scene.add("titleScene", titleScene)
 game.scene.add("menuScene", menuScene)
 game.scene.add("gameScene", gameScene)
 
 // the start scene
-game.scene.start('splashScene')
+game.scene.start("splashScene")
