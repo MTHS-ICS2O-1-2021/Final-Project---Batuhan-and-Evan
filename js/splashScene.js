@@ -14,9 +14,9 @@ class SplashScene extends Phaser.Scene {
    * This method is the constructor.
    */
   constructor() {
-    super({ key: "splashScene" })
+    super({ key: "splashScene" });
 
-    this.splashSceneBackgroundImage = null
+    this.splashSceneBackgroundImage = null;
   }
 
   /**
@@ -26,7 +26,7 @@ class SplashScene extends Phaser.Scene {
    * @param {object} data - Any data passed via ScenePlugin.add() or ScenePlugin.start().
    */
   init(data) {
-    this.cameras.main.setBackgroundColor("#ffffff")
+    this.cameras.main.setBackgroundColor("#ffffff");
   }
 
   /**
@@ -34,8 +34,8 @@ class SplashScene extends Phaser.Scene {
    * Use it load assets.
    */
   preload() {
-    console.log("Splash Scene")
-    this.load.image("splashSceneBackground", "./assets/Malik.png")
+    console.log("Splash Scene");
+    this.load.image("splashSceneBackground", "./assets/Malik.png");
   }
 
   /**
@@ -48,9 +48,9 @@ class SplashScene extends Phaser.Scene {
       0,
       0,
       "splashSceneBackground"
-    )
-    this.splashSceneBackgroundImage.x = 1920 / 2
-    this.splashSceneBackgroundImage.y = 1080 / 2
+    );
+    this.splashSceneBackgroundImage.x = 1920 / 2;
+    this.splashSceneBackgroundImage.y = 1080 / 2;
   }
 
   /**
@@ -61,9 +61,9 @@ class SplashScene extends Phaser.Scene {
    */
   update(time, delta) {
     if (time > 3000) {
-      this.scene.switch("titleScene")
+      this.scene.switch("titleScene");
     }
   }
 }
 
-export default SplashScene
+export default SplashScene;
