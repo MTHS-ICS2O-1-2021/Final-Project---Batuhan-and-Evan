@@ -6,16 +6,16 @@
 // Created on: April 2022
 // This is the Phaser3 configuration file
 
-import SplashScene from "./splashScene.js"
-import TitleScene from "./titleScene.js"
-import MenuScene from "./menuScene.js"
-import GameScene from "./gameScene.js"
+import SplashScene from "./splashScene.js";
+import TitleScene from "./titleScene.js";
+import MenuScene from "./menuScene.js";
+import GameScene from "./gameScene.js";
 
 // Our game scenes
-const splashScene = new SplashScene()
-const titleScene = new TitleScene()
-const menuScene = new MenuScene()
-const gameScene = new GameScene()
+const splashScene = new SplashScene();
+const titleScene = new TitleScene();
+const menuScene = new MenuScene();
+const gameScene = new GameScene();
 
 //* Game Scenes */
 const config = {
@@ -37,15 +37,15 @@ const config = {
   },
 }
 
-const game = new Phaser.Game(config)
+const game = new Phaser.Game(config);
 // console.log(game)
 
 // load scenes
 // NOTE: remember any "key" is global and CAN NOT be reused!
-game.scene.add("splashScene", splashScene)
-game.scene.add("titleScene", titleScene)
-game.scene.add("menuScene", menuScene)
-game.scene.add("gameScene", gameScene)
+game.scene.add("splashScene", splashScene);
+game.scene.add("titleScene", titleScene);
+game.scene.add("menuScene", menuScene);
+game.scene.add("gameScene", gameScene);
 
 // the start scene
-game.scene.start("splashScene")
+game.scene.start("splashScene");
