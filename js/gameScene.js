@@ -42,6 +42,7 @@ preload() {
   this.load.image("alien", "assets/trucker.png");
   //sound
   this.load.audio("bomb", "assets/siuu.mp3");
+  this.load.audio("music", "assets/thomas.mp3");
 }
 
 create(data) {
@@ -59,6 +60,7 @@ create(data) {
 
 
   // Collision between ship and aliens
+  this.sound.play("music")
   this.physics.add.collider(
     this.ship,
     this.alienGroup,
@@ -67,18 +69,6 @@ create(data) {
       this.physics.pause();
       alienCollide.destroy();
       shipCollide.destroy();
-      this.gameOverText = this.add
-        .text(
-          1920 / 2,
-          1080 / 2,
-          "Game Over!\nClick to play again.",
-          this.gameOverTextStyle
-        )
-        .setOrigin(0.5);
-      this.gameOverText.setInteractive({ useHandCursor: true });
-      this.GameOverText.on("pointerdown", () =>
-        this.scene.start("gameScene")
-      );
     }.bind(this)
   );
 }
