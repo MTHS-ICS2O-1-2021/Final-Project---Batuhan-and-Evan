@@ -36,7 +36,12 @@ class TitleScene extends Phaser.Scene {
     this.titleSceneBackgroundImage.y = 1080 / 2;
 
     this.titleSceneText = this.add
-      .text(1980 / 2, 1080 / 2 + 350, "Truckers Running the World", this.titleSceneTextStyle)
+      .text(
+        1980 / 2,
+        1080 / 2 + 350,
+        "Truckers Running the World",
+        this.titleSceneTextStyle
+      )
       .setOrigin(0.5);
   }
 
