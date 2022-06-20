@@ -22,20 +22,12 @@ class GameScene extends Phaser.Scene {
     super({ key: "gameScene" });
 
     this.ship = null;
-    this.fireMissile = false;
-    this.score = 0;
-    this.scoreText = null;
-    this.scoreTextStyle = {
-      font: "65px Arial",
-      fill: "#ffffff",
-      align: "center",
     };
     this.gameOverTextStyle = {
       font: "65px Arial",
       fill: "#ff0000",
       align: "center",
     };
-  }
 
   init(data) {
     this.cameras.main.setBackgroundColor("#0x5f6e7a");
@@ -45,26 +37,16 @@ class GameScene extends Phaser.Scene {
     console.log("Game Scene");
 
     //images
-    this.load.image("starBackground", "assets/starBackground.png");
-    this.load.image("ship", "assets/spaceShip.png");
-    this.load.image("missile", "assets/missile.png");
-    this.load.image("alien", "assets/alien.png");
+    this.load.image("starBackground", "assets/road.png");
+    this.load.image("ship", "assets/car.png");
+    this.load.image("alien", "assets/trucker.png");
     //sound
-    this.load.audio("laser", "assets/laser1.wav");
-    this.load.audio("explosion", "assets/barrelExploding.wav");
-    this.load.audio("bomb", "assets/bomb.wav");
+    this.load.audio("bomb", "assets/siuu.mp3");
   }
 
   create(data) {
     this.background = this.add.image(0, 0, "starBackground").setScale(2.0);
     this.background.setOrigin(0, 0);
-
-    this.scoreText = this.add.text(
-      10,
-      10,
-      "Score: " + this.score.toString(),
-      this.scoreTextStyle
-    );
 
     this.ship = this.physics.add.sprite(1920 / 2, 1080 - 100, "ship");
 
@@ -74,21 +56,7 @@ class GameScene extends Phaser.Scene {
     // create a group for the aliens
     this.alienGroup = this.add.group();
     this.createAlien();
-
-    //Collision between missiles and Aliens
-    this.physics.add.collider(
-      this.missileGroup,
-      this.alienGroup,
-      function (missileCollide, alienCollide) {
-        alienCollide.destroy();
-        missileCollide.destroy();
-        this.sound.play("explosion");
-        this.score = this.score + 1;
-        this.scoreText.setText("Score: " + this.score.toString());
-        this.createAlien();
-        this.createAlien();
-      }.bind(this)
-    );
+  
 
     // Collision between ship and aliens
     this.physics.add.collider(
@@ -120,7 +88,6 @@ class GameScene extends Phaser.Scene {
 
     const keyLeftObj = this.input.keyboard.addKey("LEFT");
     const keyRightObj = this.input.keyboard.addKey("RIGHT");
-    const keySpaceObj = this.input.keyboard.addKey("SPACE");
 
     if (keyLeftObj.isDown === true) {
       this.ship.x -= 15;
@@ -135,31 +102,6 @@ class GameScene extends Phaser.Scene {
         this.ship.x = 1920;
       }
     }
-
-    if (keySpaceObj.isDown === true) {
-      if (this.fireMissile === false) {
-        // fire missile
-        this.fireMissile = true;
-        const aNewMissile = this.physics.add.sprite(
-          this.ship.x,
-          this.ship.y,
-          "missile"
-        );
-        this.missileGroup.add(aNewMissile);
-        this.sound.play("laser");
-      }
-    }
-
-    if (keySpaceObj.isUp === true) {
-      this.fireMissile = false;
-    }
-
-    this.missileGroup.children.each(function (item) {
-      item.y = item.y - 15;
-      if (item.y < 0) {
-        item.destroy();
-      }
-    });
   }
 }
 
