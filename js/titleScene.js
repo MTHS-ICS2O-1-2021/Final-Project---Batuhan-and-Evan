@@ -31,12 +31,12 @@ class TitleScene extends Phaser.Scene {
   create(data) {
     this.titleSceneBackgroundImage = this.add
       .sprite(0, 0, "titleSceneBackground")
-      .setScale(2.75);
+      .setScale(1);
     this.titleSceneBackgroundImage.x = 1920 / 2;
-    this.titleSceneBackgroundImage.y - 1080 / 2;
+    this.titleSceneBackgroundImage.y = 1080 / 2;
 
     this.titleSceneText = this.add
-      .text(1920 / 2, 1080 / 2 + 350, "Space Aliens", this.titleSceneTextStyle)
+      .text(1980 / 2, 1080 / 2 + 350, "Truckers Running the World", this.titleSceneTextStyle)
       .setOrigin(0.5);
   }
 
