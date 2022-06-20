@@ -22,72 +22,71 @@ class GameScene extends Phaser.Scene {
     super({ key: "gameScene" });
 
     this.ship = null;
-  };
-
-init(data) {
-  this.cameras.main.setBackgroundColor("#0x5f6e7a");
-}
-
-preload() {
-  console.log("Game Scene");
-
-  //images
-  this.load.image("starBackground", "assets/road.png");
-  this.load.image("ship", "assets/car.png");
-  this.load.image("alien", "assets/trucker.png");
-  //sound
-  this.load.audio("bomb", "assets/siuu.mp3");
-  this.load.audio("music", "assets/thomas.mp3");
-}
-
-create(data) {
-  this.background = this.add.image(0, 0, "starBackground").setScale(2.0);
-  this.background.setOrigin(0, 0);
-
-  this.ship = this.physics.add.sprite(1920 / 2, 1080 - 100, "ship");
-
-  // create a group for the missiles
-  this.missileGroup = this.physics.add.group();
-
-  // create a group for the aliens
-  this.alienGroup = this.add.group();
-  this.createAlien();
-
-
-  // Collision between ship and aliens
-  this.sound.play("music")
-  this.physics.add.collider(
-    this.ship,
-    this.alienGroup,
-    function (shipCollide, alienCollide) {
-      this.sound.play("bomb");
-      this.physics.pause();
-      alienCollide.destroy();
-      shipCollide.destroy();
-    }.bind(this)
-  );
-}
-
-update(time, delta) {
-  // called 60 times a second, hopefully!
-
-  const keyLeftObj = this.input.keyboard.addKey("LEFT");
-  const keyRightObj = this.input.keyboard.addKey("RIGHT");
-
-  if (keyLeftObj.isDown === true) {
-    this.ship.x -= 15;
-    if (this.ship.x < 0) {
-      this.ship.x = 0;
-    }
   }
 
-  if (keyRightObj.isDown === true) {
-    this.ship.x += 15;
-    if (this.ship.x > 1920) {
-      this.ship.x = 1920;
+  init(data) {
+    this.cameras.main.setBackgroundColor("#0x5f6e7a");
+  }
+
+  preload() {
+    console.log("Game Scene");
+
+    //images
+    this.load.image("starBackground", "assets/road.png");
+    this.load.image("ship", "assets/car.png");
+    this.load.image("alien", "assets/trucker.png");
+    //sound
+    this.load.audio("bomb", "assets/siuu.mp3");
+    this.load.audio("music", "assets/thomas.mp3");
+  }
+
+  create(data) {
+    this.background = this.add.image(0, 0, "starBackground").setScale(2.0);
+    this.background.setOrigin(0, 0);
+
+    this.ship = this.physics.add.sprite(1920 / 2, 1080 - 100, "ship");
+
+    // create a group for the missiles
+    this.missileGroup = this.physics.add.group();
+
+    // create a group for the aliens
+    this.alienGroup = this.add.group();
+    this.createAlien();
+
+    // Collision between ship and aliens
+    this.sound.play("music");
+    this.physics.add.collider(
+      this.ship,
+      this.alienGroup,
+      function (shipCollide, alienCollide) {
+        this.sound.play("bomb");
+        this.physics.pause();
+        alienCollide.destroy();
+        shipCollide.destroy();
+      }.bind(this)
+    );
+  }
+
+  update(time, delta) {
+    // called 60 times a second, hopefully!
+
+    const keyLeftObj = this.input.keyboard.addKey("LEFT");
+    const keyRightObj = this.input.keyboard.addKey("RIGHT");
+
+    if (keyLeftObj.isDown === true) {
+      this.ship.x -= 15;
+      if (this.ship.x < 0) {
+        this.ship.x = 0;
+      }
+    }
+
+    if (keyRightObj.isDown === true) {
+      this.ship.x += 15;
+      if (this.ship.x > 1920) {
+        this.ship.x = 1920;
+      }
     }
   }
-}
 }
 
 export default GameScene;
