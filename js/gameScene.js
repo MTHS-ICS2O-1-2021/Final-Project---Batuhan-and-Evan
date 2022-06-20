@@ -23,11 +23,6 @@ class GameScene extends Phaser.Scene {
 
     this.ship = null;
   };
-    this.gameOverTextStyle = {
-  font: "65px Arial",
-  fill: "#ff0000",
-  align: "center",
-};
 
 init(data) {
   this.cameras.main.setBackgroundColor("#0x5f6e7a");
