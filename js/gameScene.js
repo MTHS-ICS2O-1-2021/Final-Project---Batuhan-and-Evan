@@ -9,12 +9,12 @@
 class GameScene extends Phaser.Scene {
   // create an alien
   createAlien() {
-    const alienXLocation = Math.floor(Math.random() * 1920) + 1; // this will get a number between 1 and 1920 
+    const alienXLocation = Math.floor(Math.random() * 1920) + 5; // this will get a number between 1 and 1920 
     let alienXVelocity = Math.floor(Math.random() * 50) + 1; // this will get a number between 1 and 50;
     alienXVelocity *= Math.round(Math.random()) ? 1 : -1; // this will add minus sign in 50% of cases
     const anAlien = this.physics.add.sprite(alienXLocation, -100, "alien");
-    anAlien.body.velocity.y = 600;
-    anAlien.body.velocity.x = alienXVelocity;
+    anAlien.body.velocity.y = 800;
+    anAlien.body.velocity.x = 0;
     this.alienGroup.add(anAlien);
   }
 
@@ -54,6 +54,8 @@ class GameScene extends Phaser.Scene {
     this.createAlien(); 
     this.createAlien(); 
     this.createAlien(); 
+    this.createAlien();
+    this.createAlien();
     this.createAlien();
     this.createAlien();
     this.createAlien();
