@@ -22,6 +22,13 @@ class GameScene extends Phaser.Scene {
     super({ key: "gameScene" });
 
     this.ship = null;
+
+    this.gameOverText = null;
+    this.gameOverTextStyle = {
+      font: "65px Arial",
+      fill: "#f7df1e",
+      align: "center",
+    };
   }
 
   init(data) {
@@ -45,6 +52,7 @@ class GameScene extends Phaser.Scene {
   create(data) {
     this.background = this.add.image(0, 0, "starBackground").setScale(2.0);
     this.background.setOrigin(0, 0);
+    this.sound.play("music");
 
     this.ship = this.physics.add.sprite(1920 / 2, 1080 - 100, "ship");
 
@@ -62,7 +70,6 @@ class GameScene extends Phaser.Scene {
     this.createAlien();
 
     // Collision between ship and aliens
-    this.sound.play("music");
     this.physics.add.collider(
       this.ship,
       this.alienGroup,
@@ -71,6 +78,18 @@ class GameScene extends Phaser.Scene {
         this.physics.pause();
         alienCollide.destroy();
         shipCollide.destroy();
+        this.gameOverText = this.add
+          .text(
+            1920 / 2,
+            1080 / 2,
+            "YOU SUCK! \nClick to play again.",
+            this.gameOverTextStyle
+          )
+          .setOrigin(0.5);
+        this.gameOverText.setInteractive({ useHandCursor: true });
+        this.gameOverText.on("pointerdown", () =>
+          this.scene.start("gameScene")
+        );
       }.bind(this)
     );
   }
@@ -82,14 +101,14 @@ class GameScene extends Phaser.Scene {
     const keyRightObj = this.input.keyboard.addKey("RIGHT");
 
     if (keyLeftObj.isDown === true) {
-      this.ship.x -= 15;
+      this.ship.x -= 20;
       if (this.ship.x < 0) {
         this.ship.x = 0;
       }
     }
 
     if (keyRightObj.isDown === true) {
-      this.ship.x += 15;
+      this.ship.x += 20;
       if (this.ship.x > 1920) {
         this.ship.x = 1920;
       }
