@@ -21,8 +21,15 @@ class GameScene extends Phaser.Scene {
   constructor() {
     super({ key: "gameScene" });
 
+    this.gameOverText = null
+    this.gameOverTextStyle = {
+      font: "65px Arial",
+      fill: "#000000",
+      align: "center",
+
     this.ship = null;
   }
+
 
   init(data) {
     this.cameras.main.setBackgroundColor("#0x5f6e7a");
@@ -71,6 +78,16 @@ class GameScene extends Phaser.Scene {
         this.physics.pause();
         alienCollide.destroy();
         shipCollide.destroy();
+        this.gameOverText = this.add
+          .text(
+            1920 / 2,
+            1080 / 2,
+            "Game Over! \nClick to play again.",
+            this.gameOverTextStyle
+          )
+          .setOrigin(0.5)
+        this.gameOverText.setInteractive({ useHandCursor: true })
+        this.gameOverText.on("pointerdown", () => this.scene.start("gameScene"))
       }.bind(this)
     );
   }
