@@ -9,12 +9,12 @@
 class GameScene extends Phaser.Scene {
   // create an alien
   createAlien() {
-    const alienXLocation = Math.floor(Math.random() * 1920) + 1; // this will get a number between 1 and 1920
+    const alienXLocation = Math.floor(Math.random() * 1920) + 5; // this will get a number between 1 and 1920
     let alienXVelocity = Math.floor(Math.random() * 50) + 1; // this will get a number between 1 and 50;
     alienXVelocity *= Math.round(Math.random()) ? 1 : -1; // this will add minus sign in 50% of cases
     const anAlien = this.physics.add.sprite(alienXLocation, -100, "alien");
-    anAlien.body.velocity.y = 200;
-    anAlien.body.velocity.x = alienXVelocity;
+    anAlien.body.velocity.y = 800;
+    anAlien.body.velocity.x = 0;
     this.alienGroup.add(anAlien);
   }
 
@@ -35,6 +35,8 @@ class GameScene extends Phaser.Scene {
     this.load.image("starBackground", "assets/road.png");
     this.load.image("ship", "assets/car.png");
     this.load.image("alien", "assets/trucker.png");
+    this.load.image("square", "assets/Redsquare.png");
+
     //sound
     this.load.audio("bomb", "assets/siuu.mp3");
     this.load.audio("music", "assets/thomas.mp3");
@@ -46,11 +48,17 @@ class GameScene extends Phaser.Scene {
 
     this.ship = this.physics.add.sprite(1920 / 2, 1080 - 100, "ship");
 
-    // create a group for the missiles
-    this.missileGroup = this.physics.add.group();
-
     // create a group for the aliens
     this.alienGroup = this.add.group();
+    this.createAlien();
+    this.createAlien();
+    this.createAlien();
+    this.createAlien();
+    this.createAlien();
+    this.createAlien();
+    this.createAlien();
+    this.createAlien();
+    this.createAlien();
     this.createAlien();
 
     // Collision between ship and aliens
@@ -86,6 +94,13 @@ class GameScene extends Phaser.Scene {
         this.ship.x = 1920;
       }
     }
+
+    this.alienGroup.children.each(function (item) {
+      if (item.y > 1080) {
+        item.x = Math.floor(Math.random() * 1920) + 1;
+        item.y = -100;
+      }
+    });
   }
 }
 
