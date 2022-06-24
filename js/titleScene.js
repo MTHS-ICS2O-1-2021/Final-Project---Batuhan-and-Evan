@@ -13,8 +13,8 @@ class TitleScene extends Phaser.Scene {
     this.titleSceneBackgroundImage = null;
     this.titleSceneText = null;
     this.titleSceneTextStyle = {
-      font: "200xp Times",
-      fill: "#fde4b9",
+      font: "150px Times",
+      fill: "#00FF00",
       align: "center",
     };
   }
@@ -38,7 +38,7 @@ class TitleScene extends Phaser.Scene {
     this.titleSceneText = this.add
       .text(
         1980 / 2,
-        1080 / 2 + 350,
+        1080 / 2,
         "Truckers Running the World",
         this.titleSceneTextStyle
       )
